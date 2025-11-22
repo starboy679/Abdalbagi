@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         gifts: {
             title: 'Personalized Gifts Shop',
             description: 'A custom gifts e-commerce website featuring ready-made gifts, customization forms, and seamless WhatsApp order processing.',
-            image: 'images/bg1.jpg',
+            image: 'images/gifts.jpg',
             link: 'https://lovelybox.xo.je/',
             details: `
                 <h3>Technologies Used:</h3>
