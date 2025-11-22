@@ -78,6 +78,32 @@ document.addEventListener('DOMContentLoaded', function () {
                     <li>Data persistence with local storage</li>
                 </ul>
             `
+        },
+        gifts: {
+            title: 'Personalized Gifts Shop',
+            description: 'A custom gifts e-commerce website featuring ready-made gifts, customization forms, and seamless WhatsApp order processing.',
+            image: 'images/bg1.jpg',
+            link: 'https://lovelybox.xo.je/',
+            details: `
+                <h3>Technologies Used:</h3>
+                <ul>
+                    <li>HTML5 and CSS3</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>WhatsApp Web API integration</li>
+                    <li>Responsive design principles</li>
+                    <li>Form validation and handling</li>
+                </ul>
+                <h3>Features:</h3>
+                <ul>
+                    <li>Ready-made gift catalog</li>
+                    <li>Custom gift personalization forms</li>
+                    <li>WhatsApp order processing</li>
+                    <li>Direct customer communication</li>
+                    <li>No payment gateway needed</li>
+                   
+                    
+                </ul>
+            `
         }
     };
 
