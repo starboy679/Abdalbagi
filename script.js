@@ -107,9 +107,37 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // Add click event to timeline items
-    document.querySelectorAll('.timeline-item').forEach(item => {
+    // Add click event to project cards
+    document.querySelectorAll('.project-card').forEach(item => {
         item.addEventListener('click', function () {
+            // Mobile tap-to-flip interaction
+            if (window.innerWidth <= 1024) {
+                // Check if the click target is the "click-info" span or a child of it.
+                const isDetailsBtn = event.target.closest('.click-info');
+
+                // If the card is not yet flipped
+                if (!this.classList.contains('is-flipped')) {
+                    // Unflip other cards to keep focus on one
+                    document.querySelectorAll('.project-card').forEach(card => {
+                        card.classList.remove('is-flipped');
+                    });
+                    
+                    this.classList.add('is-flipped');
+                    return; // Stop here, don't open modal yet
+                }
+                // If it IS flipped
+                else {
+                    // If we clicked the details button, let it proceed to open the modal
+                    if (isDetailsBtn) {
+                        // Do nothing here, let the code flow down to open modal
+                    } else {
+                        // If we clicked anywhere else on the card, unflip it
+                        this.classList.remove('is-flipped');
+                        return; // Stop here, don't open modal
+                    }
+                }
+            }
+
             const projectKey = this.getAttribute('data-project');
             const project = projects[projectKey];
 
@@ -143,6 +171,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close modal when clicking close button
     closeBtn.addEventListener('click', closeModal);
 
+    // Handle clicking outside cards on mobile to unflip them
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 1024) {
+            if (!e.target.closest('.project-card')) {
+                document.querySelectorAll('.project-card').forEach(card => {
+                    card.classList.remove('is-flipped');
+                });
+            }
+        }
+    });
+
     // Close modal when clicking outside the modal content
     modal.addEventListener('click', function (e) {
         if (e.target === modal) {
@@ -161,4 +200,37 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.classList.remove('active');
         document.body.style.overflow = ''; // Restore scrolling
     }
+});
+// Floating Code Animation for Hero Section
+document.addEventListener('DOMContentLoaded', function() {
+    const hero = document.getElementById('hero');
+    const codeSnippets = [
+        '<div>', '</span>', 'console.log()', 'import React', 
+        '#header', '.class', 'const x = 10;', 'return true;', 
+        'npm install', 'git push', 'if (err)', 'await fetch()',
+        'def main():', 'public static void', 'SELECT * FROM',
+        'padding: 0;', 'margin: auto;', 'display: flex;'
+    ];
+
+    function createFloatingCode() {
+        const el = document.createElement('div');
+        el.classList.add('floating-code');
+        el.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+        
+        // Random positioning
+        el.style.left = Math.random() * 100 + '%';
+        el.style.fontSize = (Math.random() * 10 + 10) + 'px'; // 10px to 20px
+        el.style.animationDuration = (Math.random() * 10 + 5) + 's'; // 5s to 15s
+        el.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        hero.appendChild(el);
+
+        // Remove element after animation ends
+        el.addEventListener('animationend', () => {
+            el.remove();
+        });
+    }
+
+    // Create a new code snippet every 500ms
+    setInterval(createFloatingCode, 500);
 });
